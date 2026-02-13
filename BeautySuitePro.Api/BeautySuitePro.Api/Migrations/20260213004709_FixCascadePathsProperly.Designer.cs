@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautySuitePro.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260211162029_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20260213004709_FixCascadePathsProperly")]
+    partial class FixCascadePathsProperly
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("AuditLogId");
 
                     b.Property<string>("Action")
                         .IsRequired()
@@ -78,7 +79,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("BankTransferDetailId");
 
                     b.Property<string>("AccountNumber")
                         .IsRequired()
@@ -118,7 +120,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("BookingId");
 
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2");
@@ -158,7 +161,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CurrencyId");
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -202,7 +206,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("GiftCardId");
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -248,7 +253,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("GiftCardTransactionId");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -288,7 +294,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("MediaContentId");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -333,7 +340,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("NotificationId");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -378,7 +386,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("PaymentId");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -419,7 +428,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("PaymentMethodId");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -454,15 +464,13 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("RefundId");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid?>("BookingId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("BookingId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -471,8 +479,11 @@ namespace BeautySuitePro.Api.Migrations
                     b.Property<Guid?>("GiftCardId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GiftCardId1")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Method")
                         .IsRequired()
@@ -521,31 +532,20 @@ namespace BeautySuitePro.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserId1")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BookingId");
 
-                    b.HasIndex("BookingId1");
-
                     b.HasIndex("GiftCardId");
-
-                    b.HasIndex("GiftCardId1");
 
                     b.HasIndex("PaymentId");
 
                     b.HasIndex("ProcessedBy");
 
                     b.HasIndex("RequestedBy");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Refunds");
                 });
@@ -554,7 +554,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ReviewId");
 
                     b.Property<Guid?>("BookingId")
                         .HasColumnType("uniqueidentifier");
@@ -633,7 +634,8 @@ namespace BeautySuitePro.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("UserId");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -680,7 +682,7 @@ namespace BeautySuitePro.Api.Migrations
                     b.HasOne("BeautySuitePro.Api.Models.Payment", "Payment")
                         .WithMany("BankTransferDetails")
                         .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Payment");
@@ -710,7 +712,7 @@ namespace BeautySuitePro.Api.Migrations
                     b.HasOne("BeautySuitePro.Api.Models.GiftCard", "GiftCard")
                         .WithMany("Transactions")
                         .HasForeignKey("GiftCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("GiftCard");
@@ -745,43 +747,27 @@ namespace BeautySuitePro.Api.Migrations
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("BeautySuitePro.Api.Models.Booking", null)
-                        .WithMany("Refunds")
-                        .HasForeignKey("BookingId1");
-
                     b.HasOne("BeautySuitePro.Api.Models.GiftCard", "GiftCard")
                         .WithMany()
                         .HasForeignKey("GiftCardId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("BeautySuitePro.Api.Models.GiftCard", null)
-                        .WithMany("Refunds")
-                        .HasForeignKey("GiftCardId1");
-
                     b.HasOne("BeautySuitePro.Api.Models.Payment", "Payment")
                         .WithMany("Refunds")
                         .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("BeautySuitePro.Api.Models.User", "ProcessedByUser")
-                        .WithMany()
+                        .WithMany("ProcessedRefunds")
                         .HasForeignKey("ProcessedBy")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("BeautySuitePro.Api.Models.User", "RequestedByUser")
-                        .WithMany()
-                        .HasForeignKey("RequestedBy")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BeautySuitePro.Api.Models.User", null)
-                        .WithMany("ProcessedRefunds")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("BeautySuitePro.Api.Models.User", null)
                         .WithMany("RequestedRefunds")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("RequestedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Booking");
 
@@ -799,12 +785,12 @@ namespace BeautySuitePro.Api.Migrations
                     b.HasOne("BeautySuitePro.Api.Models.Booking", "Booking")
                         .WithMany()
                         .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("BeautySuitePro.Api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Booking");
@@ -812,15 +798,8 @@ namespace BeautySuitePro.Api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BeautySuitePro.Api.Models.Booking", b =>
-                {
-                    b.Navigation("Refunds");
-                });
-
             modelBuilder.Entity("BeautySuitePro.Api.Models.GiftCard", b =>
                 {
-                    b.Navigation("Refunds");
-
                     b.Navigation("Transactions");
                 });
 

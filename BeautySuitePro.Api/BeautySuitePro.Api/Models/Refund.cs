@@ -1,12 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeautySuitePro.Api.Models
 {
     public class Refund : BaseEntity
     {
-        
         [Required]
         public Guid PaymentId { get; set; }
 
@@ -22,15 +20,15 @@ namespace BeautySuitePro.Api.Models
         public string Reason { get; set; }
 
         [Required]
-        [RegularExpression("full|partial", ErrorMessage = "Invalid refund type.")]
+        [RegularExpression("full|partial")]
         public string Type { get; set; }
 
         [Required]
-        [RegularExpression("original-method|gift-card|bank-transfer", ErrorMessage = "Invalid refund method.")]
+        [RegularExpression("original-method|gift-card|bank-transfer")]
         public string Method { get; set; }
 
         [Required]
-        [RegularExpression("pending|approved|processed|rejected", ErrorMessage = "Invalid status.")]
+        [RegularExpression("pending|approved|processed|rejected")]
         public string Status { get; set; } = "pending";
 
         [Required]
@@ -52,22 +50,12 @@ namespace BeautySuitePro.Api.Models
         [StringLength(500)]
         public string ProcessingNotes { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        // NAVIGATION PROPERTIES
+        public Payment? Payment { get; set; }
+        public Booking? Booking { get; set; }
+        public GiftCard? GiftCard { get; set; }
+        public User? RequestedByUser { get; set; }
+        public User? ProcessedByUser { get; set; }
 
-        // Navigation properties
-        [ForeignKey("PaymentId")]
-        public Payment Payment { get; set; }
-
-        [ForeignKey("BookingId")]
-        public Booking Booking { get; set; }
-
-        [ForeignKey("GiftCardId")]
-        public GiftCard GiftCard { get; set; }
-
-        [ForeignKey("RequestedBy")]
-        public User RequestedByUser { get; set; }
-
-        [ForeignKey("ProcessedBy")]
-        public User ProcessedByUser { get; set; }
     }
 }

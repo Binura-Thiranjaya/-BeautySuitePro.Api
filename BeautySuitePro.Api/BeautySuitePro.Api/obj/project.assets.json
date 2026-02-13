@@ -4616,19 +4616,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\BinuraMadoluwage\\.nuget\\packages\\": {}
+    "/Users/binurathiranjaya/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\BinuraMadoluwage\\Downloads\\BeautySuitePro\\BeautySuitePro.Api\\BeautySuitePro.Api\\BeautySuitePro.Api.csproj",
+      "projectUniqueName": "/Users/binurathiranjaya/Projects/-BeautySuitePro.Api/BeautySuitePro.Api/BeautySuitePro.Api/BeautySuitePro.Api.csproj",
       "projectName": "BeautySuitePro.Api",
-      "projectPath": "C:\\Users\\BinuraMadoluwage\\Downloads\\BeautySuitePro\\BeautySuitePro.Api\\BeautySuitePro.Api\\BeautySuitePro.Api.csproj",
-      "packagesPath": "C:\\Users\\BinuraMadoluwage\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\BinuraMadoluwage\\Downloads\\BeautySuitePro\\BeautySuitePro.Api\\BeautySuitePro.Api\\obj\\",
+      "projectPath": "/Users/binurathiranjaya/Projects/-BeautySuitePro.Api/BeautySuitePro.Api/BeautySuitePro.Api/BeautySuitePro.Api.csproj",
+      "packagesPath": "/Users/binurathiranjaya/.nuget/packages/",
+      "outputPath": "/Users/binurathiranjaya/Projects/-BeautySuitePro.Api/BeautySuitePro.Api/BeautySuitePro.Api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\BinuraMadoluwage\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/binurathiranjaya/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -4712,7 +4712,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

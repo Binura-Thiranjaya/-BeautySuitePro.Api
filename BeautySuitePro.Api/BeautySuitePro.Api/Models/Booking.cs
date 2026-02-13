@@ -26,6 +26,5 @@ namespace BeautySuitePro.Api.Models
         [ForeignKey("ServiceId")]
         public Service Service { get; set; }
 
-        public ICollection<Refund> Refunds { get; set; }
     }
 }

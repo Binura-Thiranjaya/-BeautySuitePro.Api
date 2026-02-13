@@ -29,6 +29,5 @@ namespace BeautySuitePro.Api.Models
         public string Status { get; set; } = "active";
 
         public ICollection<GiftCardTransaction> Transactions { get; set; }
-        public ICollection<Refund> Refunds { get; set; }
     }
 }
